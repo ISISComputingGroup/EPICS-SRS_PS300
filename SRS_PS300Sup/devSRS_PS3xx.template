@@ -1,0 +1,206 @@
+##########################################################################
+# Copyright (c) 2012 Lawrence Berkeley National Laboratory, Accelerator
+# Technology Group, Engineering Division
+# This code is distributed subject to a Software License Agreement found
+# in file LICENSE that is included with this distribution.
+##########################################################################
+
+record(waveform, "$(P)$(R)IDN")
+{
+    field(DESC, "SCPI identification string")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getIDN(79) $(PORT) $(A)")
+    field(PINI, "YES")
+    field(FTVL, "CHAR")
+    field(NELM, "80")
+}
+record(longin, "$(P)$(R)getESR")
+{
+    field(DESC, "SCPI get event status")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getD(*ESR) $(PORT) $(A)")
+}
+
+record(bo, "$(P)$(R)TripClear")
+{
+    field(DESC, "Clear a trip")
+    field(DTYP, "stream")
+    field(OUT,  "@devSRS_PS300.proto cmd(TCLR) $(PORT) $(A)")
+    field(ZNAM, "Clear")
+    field(ONAM, "Clear")
+    field(FLNK, "$(P)$(R)getSTB")
+}
+record(bo, "$(P)$(R)HVenable")
+{
+    field(DESC, "Enable output")
+    field(DTYP, "stream")
+    field(OUT,  "@devSRS_PS300.proto hvOffOn $(PORT) $(A)")
+    field(ZNAM, "Turn Off")
+    field(ONAM, "Turn On")
+    field(FLNK, "$(P)$(R)getSTB")
+}
+record(ao, "$(P)$(R)HVset")
+{
+    field(DESC, "Set output voltage")
+    field(DTYP, "stream")
+    field(OUT,  "@devSRS_PS300.proto setting(VSET) $(PORT) $(A)")
+    field(EGU,  "V")
+    field(LOPR, "$(VMIN)")
+    field(HOPR, "$(VMAX)")
+    field(DRVL, "$(VMIN)")
+    field(DRVH, "$(VMAX)")
+    field(PREC, "4")
+    field(FLNK, "$(P)$(R)OutputVget")
+}
+record(ao, "$(P)$(R)VLIMset")
+{
+    field(DESC, "Set output voltage limit")
+    field(DTYP, "stream")
+    field(OUT,  "@devSRS_PS300.proto setting(VLIM) $(PORT) $(A)")
+    field(EGU,  "V")
+    field(LOPR, "$(VMIN)")
+    field(HOPR, "$(VMAX)")
+    field(DRVL, "$(VMIN)")
+    field(DRVH, "$(VMAX)")
+    field(PREC, "3")
+    field(FLNK, "$(P)$(R)VLIMget")
+}
+record(ai, "$(P)$(R)VLIMget")
+{
+    field(DESC, "Get output voltage limit")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getF(VLIM) $(PORT) $(A)")
+    field(EGU,  "V")
+    field(LOPR, "$(VMIN)")
+    field(HOPR, "$(VMAX)")
+    field(PREC, "3")
+    field(PINI, "YES")
+}
+record(ao, "$(P)$(R)ILIMset")
+{
+    field(DESC, "Set output current limit")
+    field(DTYP, "stream")
+    field(OUT,  "@devSRS_PS300.proto setting(ILIM) $(PORT) $(A)")
+    field(EGU,  "A")
+    field(LOPR, "$(IMIN)")
+    field(HOPR, "$(IMAX)")
+    field(DRVL, "$(IMIN)")
+    field(DRVH, "$(IMAX)")
+    field(PREC, "3")
+    field(FLNK, "$(P)$(R)ILIMget")
+}
+record(ai, "$(P)$(R)ILIMget")
+{
+    field(DESC, "Get output current limit")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getF(ILIM) $(PORT) $(A)")
+    field(EGU,  "A")
+    field(LOPR, "$(IMIN)")
+    field(HOPR, "$(IMAX)")
+    field(PREC, "3")
+    field(PINI, "YES")
+}
+record(ao, "$(P)$(R)ITRPset")
+{
+    field(DESC, "Set output current trip limit")
+    field(DTYP, "stream")
+    field(OUT,  "@devSRS_PS300.proto setting(ITRP) $(PORT) $(A)")
+    field(EGU,  "A")
+    field(LOPR, "0")
+    field(HOPR, "$(IMAX)")
+    field(DRVL, "$(IMIN)")
+    field(DRVH, "$(IMAX)")
+    field(PREC, "3")
+    field(FLNK, "$(P)$(R)ITRPget")
+}
+record(ai, "$(P)$(R)ITRPget")
+{
+    field(DESC, "Get output current trip limit")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getF(ITRP) $(PORT) $(A)")
+    field(EGU,  "A")
+    field(LOPR, "0")
+    field(HOPR, "$(IMAX)")
+    field(PREC, "3")
+    field(PINI, "YES")
+}
+
+#
+# Dummy record to trigger readbacks
+#
+record(seq, "$(P)$(R)ReadbackPoll_")
+{
+    field(DESC, "Head of readback chain")
+    field(PINI, "YES")
+    field(SCAN, "1 second")
+    field(LNK1, "$(P)$(R)getSTB.PROC")
+    field(LNK2, "$(P)$(R)OutputVget.PROC")
+    field(LNK3, "$(P)$(R)OutputIget.PROC")
+}
+
+record(mbbiDirect, "$(P)$(R)getSTB")
+{
+    field(DESC, "SCPI get status byte")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getD(*STB) $(PORT) $(A)")
+    field(FLNK, "$(P)$(R)HVONstatus")
+}
+record(bi, "$(P)$(R)HVONstatus")
+{
+    field(DESC, "Is HV on?")
+    field(INP,  "$(P)$(R)getSTB.B7 NPP MS")
+    field(ZNAM, "Off")
+    field(ONAM, "On")
+    field(FLNK, "$(P)$(R)ILIMstatus")
+}
+record(bi, "$(P)$(R)ILIMstatus")
+{
+    field(DESC, "Is current limited?")
+    field(INP,  "$(P)$(R)getSTB.B3 NPP MS")
+    field(ZNAM, "No limit")
+    field(ONAM, "Limited")
+    field(FLNK, "$(P)$(R)ITRIPstatus")
+}
+record(bi, "$(P)$(R)ITRIPstatus")
+{
+    field(DESC, "Tripped on overcurrent?")
+    field(INP,  "$(P)$(R)getSTB.B2 NPP MS")
+    field(ZNAM, "Not tripped")
+    field(ONAM, "Tripped")
+    field(FLNK, "$(P)$(R)VTRIPstatus")
+}
+record(bi, "$(P)$(R)VTRIPstatus")
+{
+    field(DESC, "Tripped on overvoltage?")
+    field(INP,  "$(P)$(R)getSTB.B1 NPP MS")
+    field(ZNAM, "Not tripped")
+    field(ONAM, "Tripped")
+    field(FLNK, "$(P)$(R)HVSTABLEstatus")
+}
+record(bi, "$(P)$(R)HVSTABLEstatus")
+{
+    field(DESC, "HV stable?")
+    field(INP,  "$(P)$(R)getSTB.B0 NPP MS")
+    field(ZNAM, "Unstable")
+    field(ONAM, "Stable")
+}
+record(ai, "$(P)$(R)OutputVget")
+{
+    field(DESC, "Output voltage readback")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getF(VOUT) $(PORT) $(A)")
+    field(EGU,  "V")
+    field(LOPR, "$(VMIN)")
+    field(HOPR, "$(VMAX)")
+    field(PREC, "4")
+}
+record(ai, "$(P)$(R)OutputIget")
+{
+    field(DESC, "Output current readback")
+    field(DTYP, "stream")
+    field(INP,  "@devSRS_PS300.proto getF(IOUT) $(PORT) $(A)")
+    field(EGU,  "A")
+    field(LOPR, "0")
+    field(HOPR, "500.0e-6")
+    field(PREC, "4")
+}

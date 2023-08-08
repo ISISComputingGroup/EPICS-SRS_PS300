@@ -1,0 +1,12 @@
+##########################################################################
+# Copyright (c) 2012 Lawrence Berkeley National Laboratory, Accelerator
+# Technology Group, Engineering Division
+# This code is distributed subject to a Software License Agreement found
+# in file LICENSE that is included with this distribution.
+##########################################################################
+
+file devSRS_PS3xx.template
+{
+  { P="\$(P)", R="\$(R)", PORT="\$(PORT)", A="\$(A)",
+  VMIN="-10000", VMAX="-100", IMIN="0", IMAX="1e-3" }
+}

@@ -1,0 +1,49 @@
+##########################################################################
+# Copyright (c) 2012 Lawrence Berkeley National Laboratory, Accelerator
+# Technology Group, Engineering Division
+# This code is distributed subject to a Software License Agreement found
+# in file LICENSE that is included with this distribution.
+##########################################################################
+
+@writetimeout { disconnect; }
+@replytimeout { disconnect; }
+@readtimeout  { disconnect; }
+@mismatch     { disconnect; }
+
+ReplyTimeout = 500;
+InTerminator = "\n";
+OutTerminator = "\n";
+
+getIDN {
+    out "*IDN?";
+    in "%\$1[^\r\n]";
+    ExtraInput = Ignore;
+}
+
+cmd {
+    out "\$1";
+}
+
+setD {
+    out "\$1 %d";
+}
+getD {
+    out "\$1?";
+    in "%d";
+    ExtraInput = Ignore;
+}
+getF {
+    out "\$1?";
+    in "%f";
+    ExtraInput = Ignore;
+}
+
+hvOffOn {
+    out "%{HVOF|HVON}";
+}
+
+setting {
+    out "\$1 %f";
+    @init { out "\$1?"; in "%f"; }
+}
+

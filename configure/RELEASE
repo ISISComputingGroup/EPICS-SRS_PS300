@@ -1,0 +1,16 @@
+## configure/RELEASE: Location of external products
+
+# Run "gnumake clean uninstall install" in the application top
+# directory whenever this file is changed or any external module
+# pointed to by this RELEASE file is rebuilt.
+
+# If you don't want to install files into $(TOP) then define
+# INSTALL_LOCATION_APP here:
+#INSTALL_LOCATION_APP=<fullpathname>
+
+# Define path to sequencer if needed
+#SNCSEQ=/remote/apex/software/epics/R3.14.12/modules/R0/soft/synApps_5_5/support/seq-2-1-2
+
+STREAM     = /usr/local/epics/R3.14.12/modules/R0/soft/synApps_5_5/support/stream-2-5
+ASYN = /usr/local/epics/R3.14.12/modules/R0/soft/synApps_5_5/support/asyn4-18
+EPICS_BASE=/remote/apex/software/epics/R3.14.12/base-3.14.12.1
