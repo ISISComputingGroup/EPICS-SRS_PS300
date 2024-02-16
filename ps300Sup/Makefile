@@ -13,7 +13,7 @@ DB += devSRS_PS355.db
 DB += devSRS_PS365.db
 DB += devSRS_PS370.db
 DB += devSRS_PS375.db
-DB_INSTALLS += $(TOP)/SRS_PS300Sup/devSRS_PS300.proto
+DATA += ps300.proto
 
 #=======================================
 include $(TOP)/configure/RULES
