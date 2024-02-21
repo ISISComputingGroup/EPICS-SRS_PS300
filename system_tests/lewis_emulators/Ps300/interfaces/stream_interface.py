@@ -7,8 +7,8 @@ from lewis.utils.replies import conditional_reply
 @has_log
 class Ps300StreamInterface(StreamInterface):
     
-    in_terminator = "\r\n"
-    out_terminator = "\r\n"
+    in_terminator = "\n"
+    out_terminator = "d\n"
 
     def __init__(self):
         super(Ps300StreamInterface, self).__init__()
@@ -19,6 +19,7 @@ class Ps300StreamInterface(StreamInterface):
             CmdBuilder(self.enable_highvoltage).escape("HVON").eos().build(),
             CmdBuilder(self.disable_highvoltage).escape("HVOF").eos().build(),
             CmdBuilder(self.set_voltage).escape("VSET ").float().eos().build(),
+            CmdBuilder(self.get_voltage).escape("VSET?").eos().build(),
             CmdBuilder(self.set_voltage_limit).escape("VLIM ").float().eos().build(),
             CmdBuilder(self.get_voltage_limit).escape("VLIM?").eos().build(),
             CmdBuilder(self.set_current_limit).escape("ILIM ").float().eos().build(),
@@ -28,6 +29,7 @@ class Ps300StreamInterface(StreamInterface):
             CmdBuilder(self.get_serial_poll_byte).escape("*STB?").eos().build(),
             CmdBuilder(self.get_voltage).escape("VOUT?").eos().build(),
             CmdBuilder(self.get_current).escape("IOUT?").eos().build(),
+            CmdBuilder(self.get_identity).escape("*IDN?").eos().build(),
         }
 
     def handle_error(self, request, error):
@@ -54,13 +56,13 @@ class Ps300StreamInterface(StreamInterface):
         self.device.hv = False
 
     def set_voltage(self, voltage):
-        self.device.voltage = voltage
+        self.device.set_voltage(voltage)
 
     def set_voltage_limit(self, limit):
-        self.device.voltage_limit = limit
+        self.device.set_voltage_limit(limit)
 
     def get_voltage_limit(self):
-        return self.device.voltage_limit
+        return self.device.get_voltage_limit()
 
     def set_current_limit(self, limit):
         self.device.current_limit = limit
@@ -69,21 +71,23 @@ class Ps300StreamInterface(StreamInterface):
         return self.device.current_limit
 
     def set_current_trip_limit(self, limit):
-        self.device.current_trip_limit = limit
+        self.device.set_current_trip_limit(limit)
 
     def get_current_trip_limit(self):
-        return self.device.current_trip_limit
+        return self.device.get_current_trip_limit()
 
     def get_serial_poll_byte(self):
-        return int(f"{0}{int(self.device.get_voltage_tripped)}{int(self.device.get_current_tripped)}"
-                   f"{int(self.device.get_limit_exceeded())}{0}{0}{0}{int(self.device.hv)}", 2)
+        return int(f"{int(self.device.hv)}{0}{0}{0}{int(self.device.get_limit_exceeded())}"
+                   f"{int(self.device.current_tripped)}{int(self.device.voltage_tripped)}{0}", 2)
 
     def get_voltage(self):
-        return self.device.voltage
+        return self.device.get_voltage()
 
     def get_current(self):
-        return self.device.current
+        return self.device.get_current()
 
+    def get_identity(self):
+        return self.device.identity()
 
 
 

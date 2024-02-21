@@ -2,7 +2,6 @@ from collections import OrderedDict
 from .states import DefaultState
 from lewis.devices import StateMachineDevice
 
-
 class SimulatedPs300(StateMachineDevice):
 
     def _initialize_data(self):
@@ -14,7 +13,7 @@ class SimulatedPs300(StateMachineDevice):
         self._voltage_limit = 100
         self.current_limit = 5
         self._current_trip_limit = 10
-        self._current = 0
+        self._current = 0.0
         self.current_tripped = False
         self.voltage_tripped = False
 
@@ -44,6 +43,12 @@ class SimulatedPs300(StateMachineDevice):
         self._current = current
         self._check_current_limit(self)
 
+    def get_voltage(self):
+        return self._voltage
+
+    def get_current(self):
+        return self._current
+
     def get_limit_exceeded(self):
         return self.current_limit < self._current
 
@@ -51,24 +56,26 @@ class SimulatedPs300(StateMachineDevice):
         self._current_trip_limit = limit
         self._check_current_limit(self)
 
+    def get_current_trip_limit(self):
+        return self._current_trip_limit
+
     def set_voltage_limit(self, limit):
         self._voltage_limit = limit
         self._check_voltage_limit(self)
 
+    def get_voltage_limit(self):
+        return self._voltage_limit
+
     def _check_current_trip_limit(self):
         if self._current_trip_limit < self._current:
             self.current_tripped = True
-
-    def get_current_tripped(self):
-        return self.device._current_tripped
-
-    def get_voltage_tripped(self):
-        return self.device._voltage_tripped
 
     def _check_voltage_limit(self):
         if self._voltage_limit < self._voltage:
             self.voltage_tripped = True
 
 
+    def identity(self):
+        return "StanfordResearchSystems,PS3XX,000,001"
 
 
