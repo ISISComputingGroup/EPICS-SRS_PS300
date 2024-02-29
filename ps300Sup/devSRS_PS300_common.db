@@ -29,63 +29,63 @@ record(ao, "$(P)SIM:IDN")
     field(DTYP, "Soft Channel")
 }
 
-record(ao, "$(P)SIM:ESR") 
+record(ao, "$(P)SIM:getESR") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-record(ao, "$(P)SIM:TRIP:CLEAR") 
+record(ao, "$(P)SIM:TripClear") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-record(ao, "$(P)SIM:HV:ENABLE") 
+record(ao, "$(P)SIM:HVenable") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-record(ao, "$(P)SIM:VOLTAGE") 
+record(ao, "$(P)SIM:OutputVget") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-alias("$(P)SIM:VOLTAGE","$(P)SIM:HV:SP")
+alias("$(P)SIM:OutputVget","$(P)SIM:HVset")
 
-record(ao, "$(P)SIM:VLIM") 
+record(ao, "$(P)SIM:VLIMget") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-alias("$(P)SIM:VLIM","$(P)SIM:VLIM:SP")
+alias("$(P)SIM:VLIMget","$(P)SIM:VLIMset")
 
-record(ao, "$(P)SIM:ILIM") 
+record(ao, "$(P)SIM:ILIMget") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-alias("$(P)SIM:ILIM","$(P)SIM:ILIM:SP")
+alias("$(P)SIM:ILIMget","$(P)SIM:ILIMset")
 
-record(ao, "$(P)SIM:ITRP") 
+record(ao, "$(P)SIM:ITRPget") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-alias("$(P)SIM:ITRP","$(P)SIM:ITRP:SP")
+alias("$(P)SIM:ITRPget","$(P)SIM:ITRPset")
 
-record(ao, "$(P)SIM:STB") 
+record(ao, "$(P)SIM:getSTB") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
 
-record(ao, "$(P)SIM:CURRENT") 
+record(ao, "$(P)SIM:OutputIget") 
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
