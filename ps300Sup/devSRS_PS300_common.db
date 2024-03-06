@@ -1,15 +1,4 @@
-
-record(bo, "$(P)SIM")
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-    field(ZNAM, "NO")
-    field(ONAM, "YES")
-    field(VAL, "$(RECSIM=0)")
-    field(PINI, "YES")
-}
-
-record(bo, "$(P)DISABLE")
+record(bo, "$(P)$(R)DISABLE")
 {
     field(DESC, "Disable comms")
     field(PINI, "YES")
@@ -20,75 +9,43 @@ record(bo, "$(P)DISABLE")
 }
 
 #
-# Simulation Records
+# ISIS Aliases
 #
 
-record(ao, "$(P)SIM:IDN") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)getESR","$(P)$(R)ESR")
 
-record(ao, "$(P)SIM:getESR") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)TripClear","$(P)$(R)CLEAR:SP")
+alias("$(P)$(R)CLEAR:SP","$(P)$(R)CLEAR")
 
-record(ao, "$(P)SIM:TripClear") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)HVenable","$(P)$(R)HV:SP")
+alias("$(P)$(R)HV:SP","$(P)$(R)HV")
 
-record(ao, "$(P)SIM:HVenable") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)HVset","$(P)$(R)VOLTAGE:SP")
+alias("$(P)$(R)OutputVget","$(P)$(R)VOLTAGE")
+alias("$(P)$(R)VOLTAGE","$(P)$(R):SP:RBV")
 
-record(ao, "$(P)SIM:OutputVget") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)VLIMset","$(P)$(R)VOLTAGE:LIMIT:SP")
+alias("$(P)$(R)VLIMget","$(P)$(R)VOLTAGE:LIMIT")
+alias("$(P)$(R)VOLTAGE:LIMIT","$(P)$(R)VOLTAGE:LIMIT:SP:RBV")
 
-alias("$(P)SIM:OutputVget","$(P)SIM:HVset")
+alias("$(P)$(R)ILIMset","$(P)$(R)CURRENT:LIMIT:SP")
+alias("$(P)$(R)ILIMget","$(P)$(R)CURRENT:LIMIT")
+alias("$(P)$(R)CURRENT:LIMIT","$(P)$(R)CURRENT:LIMIT:SP:RBV")
 
-record(ao, "$(P)SIM:VLIMget") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)ITRPset","$(P)$(R)CURRENT:TRIP:LIMIT:SP")
+alias("$(P)$(R)ITRPget","$(P)$(R)CURRENT:TRIP:LIMIT")
+alias("$(P)$(R)CURRENT:TRIP:LIMIT","$(P)$(R)CURRENT:TRIP:LIMIT:SP:RBV")
 
-alias("$(P)SIM:VLIMget","$(P)SIM:VLIMset")
+alias("$(P)$(R)getSTB","$(P)$(R)STATUS")
 
-record(ao, "$(P)SIM:ILIMget") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)HVONstatus","$(P)$(R)HV:STATUS")
 
-alias("$(P)SIM:ILIMget","$(P)SIM:ILIMset")
+alias("$(P)$(R)ILIMstatus","$(P)$(R)CURRENT:LIMIT:STATUS")
 
-record(ao, "$(P)SIM:ITRPget") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)ITRIPstatus","$(P)$(R)CURRENT:TRIP:STATUS")
 
-alias("$(P)SIM:ITRPget","$(P)SIM:ITRPset")
+alias("$(P)$(R)VTRIPstatus","$(P)$(R)VOLTAGE:TRIP:STATUS")
 
-record(ao, "$(P)SIM:getSTB") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
+alias("$(P)$(R)HVSTABLEstatus","$(P)$(R)HV:STABLE:STATUS")
 
-record(ao, "$(P)SIM:OutputIget") 
-{
-    field(SCAN, "Passive")
-    field(DTYP, "Soft Channel")
-}
-
-
+alias("$(P)$(R)OutputIget","$(P)$(R)CURRENT")
