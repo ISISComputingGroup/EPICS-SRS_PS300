@@ -13,16 +13,12 @@ record(waveform, "$(P)$(R)IDN")
     field(PINI, "YES")
     field(FTVL, "CHAR")
     field(NELM, "80")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:IDN")
 }
 record(longin, "$(P)$(R)getESR")
 {
     field(DESC, "SCPI get event status")
     field(DTYP, "stream")
     field(INP,  "@ps300.proto getD(*ESR) $(PORT) $(A)")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:getESR")
 }
 
 record(bo, "$(P)$(R)TripClear")
@@ -34,8 +30,6 @@ record(bo, "$(P)$(R)TripClear")
     field(ONAM, "Clear")
     field(HIGH, "1")
     field(FLNK, "$(P)$(R)getSTB")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:TripClear")
 }
 record(bo, "$(P)$(R)HVenable")
 {
@@ -45,8 +39,6 @@ record(bo, "$(P)$(R)HVenable")
     field(ZNAM, "Turn Off")
     field(ONAM, "Turn On")
     field(FLNK, "$(P)$(R)getSTB")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:HVenable")
 }
 record(ao, "$(P)$(R)HVset")
 {
@@ -75,8 +67,6 @@ record(ao, "$(P)$(R)VLIMset")
     field(DRVH, "$(VMAX)")
     field(PREC, "3")
     field(FLNK, "$(P)$(R)VLIMget")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:VLIMset")
 }
 record(ai, "$(P)$(R)VLIMget")
 {
@@ -88,8 +78,6 @@ record(ai, "$(P)$(R)VLIMget")
     field(HOPR, "$(VMAX)")
     field(PREC, "3")
     field(PINI, "YES")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:VLIMget")
 }
 record(ao, "$(P)$(R)ILIMset")
 {
@@ -103,8 +91,6 @@ record(ao, "$(P)$(R)ILIMset")
     field(DRVH, "$(IMAX)")
     field(PREC, "3")
     field(FLNK, "$(P)$(R)ILIMget")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:ILIMset")
 }
 record(ai, "$(P)$(R)ILIMget")
 {
@@ -116,8 +102,6 @@ record(ai, "$(P)$(R)ILIMget")
     field(HOPR, "$(IMAX)")
     field(PREC, "3")
     field(PINI, "YES")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:ILIMget")
 }
 record(ao, "$(P)$(R)ITRPset")
 {
@@ -131,8 +115,6 @@ record(ao, "$(P)$(R)ITRPset")
     field(DRVH, "$(IMAX)")
     field(PREC, "3")
     field(FLNK, "$(P)$(R)ITRPget")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:ITRPset")
 }
 record(ai, "$(P)$(R)ITRPget")
 {
@@ -144,8 +126,6 @@ record(ai, "$(P)$(R)ITRPget")
     field(HOPR, "$(IMAX)")
     field(PREC, "3")
     field(PINI, "YES")
-    field(SIML, "$(P)$(R)SIM")
-    field(SIOL, "$(P)$(R)SIM:ITRPget")
 }
 
 #
