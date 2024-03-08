@@ -37,13 +37,13 @@ class Ps300Tests(unittest.TestCase):
     @parameterized.expand([
         ("_0_case", "Turn Off", 0, 0, 0, "Off", "No limit", "Not tripped", "Not tripped"),
         ("_hv_only_case", "Turn On", 0, 0, 128, "On", "No limit", "Not tripped", "Not tripped"),
-        ("_Limit_only_case", "Turn Off", 0, 6, 8, "Off", "Limited", "Not tripped", "Not tripped"),
-        ("_Current_Trip_case", "Turn Off", 0, 11, 12, "Off", "Limited", "Tripped", "Not tripped"),
+        ("_Limit_only_case", "Turn Off", 0, 0.002, 8, "Off", "Limited", "Not tripped", "Not tripped"),
+        ("_Current_Trip_case", "Turn Off", 0, 0.006, 12, "Off", "Limited", "Tripped", "Not tripped"),
         ("_Voltage_Trip_case", "Turn Off", 101, 0, 2, "Off", "No limit", "Not tripped", "Tripped"),
-        ("_Voltage_Trip_and_limit_off_case", "Turn Off", 101, 6, 10, "Off", "Limited", "Not tripped", "Tripped"),
-        ("_Voltage_Trip_and_limit_on_case", "Turn On", 101, 6, 138, "On", "Limited", "Not tripped", "Tripped"),
-        ("_off_all_Trip_case", "Turn Off", 101, 11, 14, "Off", "Limited", "Tripped", "Tripped"),
-        ("_on_all_Trip_case", "Turn On", 101, 11, 142, "On", "Limited", "Tripped", "Tripped"),
+        ("_Voltage_Trip_and_limit_off_case", "Turn Off", 101, 0.002, 10, "Off", "Limited", "Not tripped", "Tripped"),
+        ("_Voltage_Trip_and_limit_on_case", "Turn On", 101, 0.002, 138, "On", "Limited", "Not tripped", "Tripped"),
+        ("_off_all_Trip_case", "Turn Off", 101, 0.006, 14, "Off", "Limited", "Tripped", "Tripped"),
+        ("_on_all_Trip_case", "Turn On", 101, 0.006, 142, "On", "Limited", "Tripped", "Tripped"),
     ])
     def test_WHEN_status_set_THEN_properly_split(self, _, hv_on, voltage, current, status, hv_status, current_limit,
                                                  current_trip, voltage_limit):

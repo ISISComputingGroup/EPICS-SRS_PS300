@@ -2,6 +2,7 @@ from collections import OrderedDict
 from .states import DefaultState
 from lewis.devices import StateMachineDevice
 
+
 class SimulatedPs300(StateMachineDevice):
 
     def _initialize_data(self):
@@ -11,8 +12,8 @@ class SimulatedPs300(StateMachineDevice):
         self.hv = False
         self._voltage = 0.0
         self._voltage_limit = 100
-        self.current_limit = 5
-        self._current_trip_limit = 10
+        self.current_limit = 0.001
+        self._current_trip_limit = 0.005
         self._current = 0.0
         self.current_tripped = False
         self.voltage_tripped = False
@@ -54,14 +55,14 @@ class SimulatedPs300(StateMachineDevice):
 
     def set_current_trip_limit(self, limit):
         self._current_trip_limit = limit
-        self._check_current_limit(self)
+        self._check_current_trip_limit()
 
     def get_current_trip_limit(self):
         return self._current_trip_limit
 
     def set_voltage_limit(self, limit):
         self._voltage_limit = limit
-        self._check_voltage_limit(self)
+        self._check_voltage_limit()
 
     def get_voltage_limit(self):
         return self._voltage_limit
