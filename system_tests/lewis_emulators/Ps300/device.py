@@ -30,9 +30,9 @@ class SimulatedPs300(StateMachineDevice):
         ])
 
     def clear(self):
-        if self.voltage < self.voltage_limit:
+        if self._voltage < self._voltage_limit:
             self.voltage_tripped = False
-        if self.current < self.current_trip_limit:
+        if self._current < self._current_trip_limit:
             self.current_tripped = False
 
     def set_voltage(self, voltage):
@@ -41,7 +41,7 @@ class SimulatedPs300(StateMachineDevice):
 
     def set_current(self, current):
         self._current = current
-        self._check_current_limit(self)
+        self._check_current_trip_limit()
 
     def get_voltage(self):
         return self._voltage
@@ -73,7 +73,6 @@ class SimulatedPs300(StateMachineDevice):
     def _check_voltage_limit(self):
         if self._voltage_limit < self._voltage:
             self.voltage_tripped = True
-
 
     def identity(self):
         return "StanfordResearchSystems,PS3XX,000,001"
