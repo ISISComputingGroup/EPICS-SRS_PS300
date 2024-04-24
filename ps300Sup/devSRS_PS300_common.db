@@ -1,0 +1,51 @@
+record(bo, "$(P)$(R)DISABLE")
+{
+    field(DESC, "Disable comms")
+    field(PINI, "YES")
+    field(VAL, "$(DISABLE=0)")
+    field(OMSL, "supervisory")
+    field(ZNAM, "COMMS ENABLED")
+    field(ONAM, "COMMS DISABLED")
+}
+
+#
+# ISIS Aliases
+#
+
+alias("$(P)$(R)getESR","$(P)$(R)ESR")
+
+alias("$(P)$(R)TripClear","$(P)$(R)CLEAR:SP")
+alias("$(P)$(R)CLEAR:SP","$(P)$(R)CLEAR")
+
+alias("$(P)$(R)HVenable","$(P)$(R)HV:SP")
+alias("$(P)$(R)HV:SP","$(P)$(R)HV")
+
+alias("$(P)$(R)HVset","$(P)$(R)VOLTAGE:SP")
+alias("$(P)$(R)OutputVget","$(P)$(R)VOLTAGE")
+alias("$(P)$(R)VOLTAGE","$(P)$(R):SP:RBV")
+
+alias("$(P)$(R)VLIMset","$(P)$(R)VOLTAGE:LIMIT:SP")
+alias("$(P)$(R)VLIMget","$(P)$(R)VOLTAGE:LIMIT")
+alias("$(P)$(R)VOLTAGE:LIMIT","$(P)$(R)VOLTAGE:LIMIT:SP:RBV")
+
+alias("$(P)$(R)ILIMset","$(P)$(R)CURRENT:LIMIT:SP")
+alias("$(P)$(R)ILIMget","$(P)$(R)CURRENT:LIMIT")
+alias("$(P)$(R)CURRENT:LIMIT","$(P)$(R)CURRENT:LIMIT:SP:RBV")
+
+alias("$(P)$(R)ITRPset","$(P)$(R)CURRENT:TRIP:LIMIT:SP")
+alias("$(P)$(R)ITRPget","$(P)$(R)CURRENT:TRIP:LIMIT")
+alias("$(P)$(R)CURRENT:TRIP:LIMIT","$(P)$(R)CURRENT:TRIP:LIMIT:SP:RBV")
+
+alias("$(P)$(R)getSTB","$(P)$(R)STATUS")
+
+alias("$(P)$(R)HVONstatus","$(P)$(R)HV:STATUS")
+
+alias("$(P)$(R)ILIMstatus","$(P)$(R)CURRENT:LIMIT:STATUS")
+
+alias("$(P)$(R)ITRIPstatus","$(P)$(R)CURRENT:TRIP:STATUS")
+
+alias("$(P)$(R)VTRIPstatus","$(P)$(R)VOLTAGE:TRIP:STATUS")
+
+alias("$(P)$(R)HVSTABLEstatus","$(P)$(R)HV:STABLE:STATUS")
+
+alias("$(P)$(R)OutputIget","$(P)$(R)CURRENT")
