@@ -5,7 +5,6 @@ from lewis.utils.command_builder import CmdBuilder
 
 @has_log
 class Ps300StreamInterface(StreamInterface):
-    
     in_terminator = "\n"
     out_terminator = "d\n"
 
@@ -76,8 +75,11 @@ class Ps300StreamInterface(StreamInterface):
         return self.device.get_current_trip_limit()
 
     def get_serial_poll_byte(self):
-        return int(f"{int(self.device.hv)}{0}{0}{0}{int(self.device.get_limit_exceeded())}"
-                   f"{int(self.device.current_tripped)}{int(self.device.voltage_tripped)}{0}", 2)
+        return int(
+            f"{int(self.device.hv)}{0}{0}{0}{int(self.device.get_limit_exceeded())}"
+            f"{int(self.device.current_tripped)}{int(self.device.voltage_tripped)}{0}",
+            2,
+        )
 
     def get_voltage(self):
         return self.device.get_voltage()
@@ -87,7 +89,3 @@ class Ps300StreamInterface(StreamInterface):
 
     def get_identity(self):
         return self.device.identity()
-
-
-
-

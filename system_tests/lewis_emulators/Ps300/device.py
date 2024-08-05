@@ -6,7 +6,6 @@ from .states import DefaultState
 
 
 class SimulatedPs300(StateMachineDevice):
-
     def _initialize_data(self):
         """
         Initialize all of the device's attributes.
@@ -22,15 +21,14 @@ class SimulatedPs300(StateMachineDevice):
 
     def _get_state_handlers(self):
         return {
-            'default': DefaultState(),
+            "default": DefaultState(),
         }
 
     def _get_initial_state(self):
-        return 'default'
+        return "default"
 
     def _get_transition_handlers(self):
-        return OrderedDict([
-        ])
+        return OrderedDict([])
 
     def clear(self):
         if self._voltage < self._voltage_limit:
@@ -79,5 +77,3 @@ class SimulatedPs300(StateMachineDevice):
 
     def identity(self):
         return "StanfordResearchSystems,PS3XX,000,001"
-
-
